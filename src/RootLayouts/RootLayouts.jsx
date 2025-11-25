@@ -4,7 +4,7 @@ import Footer from "../pages/Home/utility/Footer/Footer";
 
 const RootLayouts = () => {
     return (
-        <div className="max-w-[1500px] mx-auto">
+        <div className="lg:max-w-[1500px] max-w-[90%] mx-auto">
             <Navbar/>
             <Outlet/>
             <Footer/>
