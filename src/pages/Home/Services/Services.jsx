@@ -42,7 +42,7 @@ export default function Services() {
 
   return (
     <div
-      className={`lg:p-[100px] rounded-4xl p-10 bg-[#0A2E36] mb-[100px]`}
+      className={`lg:p-[100px] rounded-4xl p-10 bg-[#0A2E36] mb-20`}
     >
       <header className="text-center mb-16">
         <h2 className={`text-4xl font-extrabold mb-4 text-[#CBDFE5]`}>
