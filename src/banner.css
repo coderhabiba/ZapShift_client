@@ -1,0 +1,22 @@
+/* Swiper Pagination ডটগুলির জন্য কাস্টম স্টাইল */
+.swiper-pagination-bullet {
+    width: 25px !important;
+    height: 4px !important;
+    border-radius: 5px !important;
+    background: #cbdfe5 !important; /* নিষ্ক্রিয় (Inactive) ডট রং */
+    opacity: 1 !important;
+    transition: width 0.3s;
+}
+
+/* সক্রিয় (Active) ডটগুলির জন্য কাস্টম স্টাইল */
+.swiper-pagination-bullet-active {
+    width: 40px !important;
+    background: #0a2e36 !important; /* সক্রিয় (Active) ডট রং */
+}
+
+/* Swiper pagination এর পজিশন ঠিক করার জন্য */
+.swiper-pagination {
+    bottom: 20px !important; /* নিচে থেকে একটু উপরে সরাতে */
+    text-align: left !important; /* বাম দিকে সরাতে */
+    padding-left: 40px; /* প্রয়োজন অনুসারে প্যাডিং দিন */
+}
