@@ -30,7 +30,8 @@ const ParcelFeatures = () => {
       description: (
         <>
           Our dedicated support team is available around the clock to assist you
-          with any questions, updates, or delivery <br /> concerns—anytime you need us.
+          with any questions, updates, or delivery <br /> concerns—anytime you
+          need us.
         </>
       ),
       img: safe,
@@ -45,13 +46,16 @@ const ParcelFeatures = () => {
             key={index}
             className="bg-[#ffffffb3] rounded-3xl shadow-sm p-8 flex lg:flex-row flex-col gap-6 items-center"
           >
-            <div className="pr-12 lg:border-r border-b border-dashed border-gray-300 flex items-center justify-center w-[200px] h-[200px]">
+            <div
+              className="pr-12 border-b border-dashed border-[#03373d7e] md:border-b    lg:border-b-0 lg:border-r flex items-center justify-center w-[200px] h-[200px]"
+            >
               <img
                 src={item.img}
                 alt={item.title}
                 className="w-full h-full object-contain"
               />
             </div>
+
             <div className="pl-12">
               <h3 className="text-2xl font-extrabold text-secondary mb-4">
                 {item.title}
