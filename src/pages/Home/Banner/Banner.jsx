@@ -65,7 +65,7 @@ const Banner = () => {
   const activeSlide = slides[currentSlide];
 
   return (
-    <div className="bg-white mt-8 mb-40 rounded-4xl lg:p-20 p-10">
+    <div className="bg-white mt-8 mb-[100px] rounded-4xl lg:p-20 p-10">
       <div className="w-full rounded-4xl">
         {activeSlide && (
           <div className="transition-opacity duration-700 opacity-100">
