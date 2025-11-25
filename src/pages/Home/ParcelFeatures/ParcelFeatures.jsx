@@ -39,7 +39,7 @@ const ParcelFeatures = () => {
 
   return (
     <div className="py-16 border-t border-b border-dashed border-[#03464d] mb-20">
-      <div className="space-y-10">
+      <div className="space-y-6">
         {features?.map((item, index) => (
           <div
             key={index}
