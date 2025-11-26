@@ -13,7 +13,7 @@ const ClientBrands = () => {
       </h2>
       <Marquee gradient={false} speed={50}>
         <div className="flex justify-between items-center space-x-28">
-          <img src={brand1} alt="Brand 1" className="h-6" />
+          <img src={brand1} alt="Brand 1" className="h-6 ml-28" />
           <img src={brand2} alt="Brand 2" className="h-6" />
           <img src={brand3} alt="Brand 3" className="h-6" />
           <img src={brand4} alt="Brand 4" className="h-6" />

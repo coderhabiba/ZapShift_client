@@ -14,3 +14,40 @@ body{
    background-color: #eaeced;
    padding: 50px 0;
 }
+
+.mySwiper .swiper-slide {
+  opacity: 0.5; 
+  /* ট্রান্সফরমেশন স্মুথ করার জন্য ট্রানজিশন যোগ করা হলো */
+  transition: opacity 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.mySwiper .swiper-slide-active {
+  /* অপাসিটি সলিড (পুরোপুরি দৃশ্যমান) */
+  opacity: 1; 
+}
+
+.mySwiper .swiper-pagination-bullet {
+  background-color: #d1d5db !important; /* Tailwind gray-300 */
+  opacity: 1 !important;
+  width: 8px;
+  height: 8px;
+}
+
+/* অ্যাকটিভ বুলেট স্টাইল (কাস্টম ক্লাস ব্যবহার করে) */
+.mySwiper .swiper-pagination-bullet-active-custom {
+  background-color: #03373d !important;  
+  border-radius: 9999px; /* পুরোপুরি গোলাকার */
+}
+
+/* 3. নেভিগেশন বাটনগুলোর ডিফল্ট লুক সরানো এবং কাস্টম বাটন ব্যবহার করা */
+/* Swiper এর ডিফল্ট বাটনগুলোকে অদৃশ্য করা হলো */
+.mySwiper .swiper-button-prev,
+.mySwiper .swiper-button-next {
+    display: none !important;
+}
+
+/* Pagination এর পজিশন ঠিক করা */
+.mySwiper .swiper-pagination {
+    /* এটি নিশ্চিত করবে যে ডটগুলো নিচে মাঝখানে অবস্থান করছে */
+    bottom: 0px !important;
+}
