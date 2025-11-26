@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import FAQ from "../FAQ/FAQ";
 import HowItWorks from "../HowItWorks/HowItWorks";
 import Merchant from "../Merchant/Merchant";
 import ParcelFeatures from "../ParcelFeatures/ParcelFeatures";
@@ -17,6 +18,7 @@ const Home = () => {
         <ParcelFeatures />
         <Merchant />
         <Reviews reviewsPromise={reviewsPromise} />
+        <FAQ/>
       </div>
     );
 };
