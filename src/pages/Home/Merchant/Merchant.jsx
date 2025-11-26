@@ -8,7 +8,7 @@ const Merchant = () => {
       className="bg-secondary rounded-4xl p-20 flex flex-col lg:flex-row justify-between items-center mb-20"
       style={{ backgroundImage: `url(${bgImg})`, backgroundRepeat: "no-repeat", backgroundSize: "contain" }}
     >
-      <div>
+      <div className='lg:mb-0 mb-10'>
         <h2 className="text-[40px] font-extrabold text-white">
           Merchant and Customer Satisfaction <br /> is Our First Priority
         </h2>
