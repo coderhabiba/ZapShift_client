@@ -4,8 +4,8 @@ import { FaArrowUp } from "react-icons/fa6";
 
 const Navbar = () => {
   const links = <>
-    <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Coverage</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Services</NavLink></li>
+    <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/coverage'}>Coverage</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>About Us</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Pricing</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Be a Rider</NavLink></li>
