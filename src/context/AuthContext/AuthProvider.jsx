@@ -1,9 +1,9 @@
-
+import { AuthContext } from './AuthContext';
 const AuthProvider = () => {
   return (
-    <div>
-      
-    </div>
+    <AuthContext>
+       
+    </AuthContext>
   );
 };
 
