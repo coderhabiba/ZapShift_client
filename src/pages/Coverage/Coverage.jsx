@@ -1,12 +1,31 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { useLoaderData } from "react-router";
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { useLoaderData } from 'react-router-dom';
+import { useRef } from 'react';
+
 
 const Coverage = () => {
-  const position = [23.685, 90.3563];
+  const position = [23.685, 90.3563]; // Bangladesh Center
   const serviceCenters = useLoaderData();
-  console.log(serviceCenters);
-  
+  const mapRef = useRef();
+
+  const handleSearch = e => {
+    e.preventDefault();
+    const location = e.target.location.value;
+
+    if (!location) return;
+
+    // Search logic: check district
+    const district = serviceCenters.find(c =>
+      c.district.toLowerCase().includes(location.toLowerCase())
+    );
+
+    if (district) {
+      const coord = [district.latitude, district.longitude]
+      console.log(coord,district);
+      mapRef.current.flyTo(coord, 14);
+    }
+  };
 
   return (
     <div className="mt-8 mb-28">
@@ -15,58 +34,53 @@ const Coverage = () => {
           We are available in 64 districts
         </h2>
 
-        <div className="relative flex rounded-lg lg:w-[40%] lg:mt-12 mt-3">
-          <input
-            type="text"
-            id="hs-trailing-button-add-on-with-icon-and-button"
-            name="hs-trailing-button-add-on-with-icon-and-button"
-            className="py-2.5 sm:py-3 px-4 ps-11 w-full rounded-full sm:text-sm disabled:opacity-50 disabled:pointer-events-none bg-[#EAECED]"
-          />
-          <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-4">
-            <svg
-              className="shrink-0 size-4 text-gray-400 dark:text-neutral-500"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+        {/* Search Box */}
+        <div className="rounded-lg w-[50%] lg:mt-12 mt-3">
+          <form className='relative' onSubmit={handleSearch}>
+            <input
+              type="search"
+              name="location"
+              placeholder="Search Area"
+              className="py-2.5 sm:py-3 px-4 w-full rounded-full sm:text-sm bg-[#EAECED] outline-none disabled:cursor-not-allowed disabled:opacity-75"
+            />
+            <button
+              type="submit"
+              className="absolute right-0 py-3 px-8 inline-flex justify-center items-center text-sm font-semibold rounded-full bg-primary text-secondary hover:bg-lime-400 disabled:bg-gray-400 disabled:text-gray-600 disabled:cursor-not-allowed"
             >
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
-            </svg>
-          </div>
-
-          <button
-            type="button"
-            className="absolute right-0 py-3 px-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full bg-primary text-secondary hover:bg-lime-400 focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none"
-          >
-            Search
-          </button>
+              Search
+            </button>
+          </form>
         </div>
+
         <div className="divider lg:my-12 my-4"></div>
+
         <h4 className="lg:mb-12 mb-4 lg:text-3xl text-xl font-extrabold text-secondary">
           We deliver almost all over Bangladesh
         </h4>
 
-        <div className="w-full h-[1200px]">
+        {/* Map */}
+        <div className="w-full">
           <MapContainer
-            className="h-[1200px]"
             center={position}
             zoom={8}
             scrollWheelZoom={false}
+            className='h-[800px]'
+            ref={mapRef}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution="&copy; OpenStreetMap contributors"
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {serviceCenters.map(center => (
-              <Marker position={[center.latitude, center.longitude]}>
+
+            {/* Render Markers for all service centers */}
+            {serviceCenters.map((center, index) => (
+              <Marker
+                key={index}
+                position={[center.latitude, center.longitude]}
+              >
                 <Popup>
-                  <strong>{center.district}</strong> <br />Service Area: {center.covered_area.join(',')}
+                  <strong>{center.district}</strong> <br />
+                  Service Area: {center.covered_area.join(', ')}
                 </Popup>
               </Marker>
             ))}

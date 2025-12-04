@@ -1,5 +1,8 @@
+import { Link } from 'react-router';
+
 const Logo = () => {
-    return (
+  return (
+    <Link to={"/"}>
       <div className="flex items-end">
         <img
           className="md:w-9 w-4 md:h-12 h-6"
@@ -8,7 +11,8 @@ const Logo = () => {
         />
         <p className="lg:-ml-4 -ml-2 font-extrabold">ZapShift</p>
       </div>
-    );
+    </Link>
+  );
 };
 
 export default Logo;
