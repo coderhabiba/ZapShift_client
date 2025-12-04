@@ -1,16 +1,24 @@
-import { useForm } from "react-hook-form";
-import { Link } from "react-router";
-
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
 
 const Register = () => {
-  const { register, handleSubmit, formState: {errors} } = useForm();
-
-  const handleRegistration = (data) => {
-     console.log(data);
-     
-  }
-  // const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).+$/;
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { registerUser } = useAuth();
+  const handleRegistration = data => {
+    console.log(data);
+    registerUser(data.email, data.password)
+      .then(res => {
+        console.log(res.user);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="max-w-sm shrink-0 ml-44 mt-20">
@@ -53,8 +61,8 @@ const Register = () => {
           )}
           {errors.password?.type === 'pattern' && (
             <p className="text-red-500">
-              password must have at least one uppercase, one lowercase, one special
-              character
+              password must have at least one uppercase, one lowercase, one
+              special character
             </p>
           )}
           <div>

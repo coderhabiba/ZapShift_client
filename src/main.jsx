@@ -3,9 +3,12 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import { router } from './router/router.jsx'
 import { RouterProvider } from 'react-router'
+import AuthProvider from './context/AuthContext/AuthProvider';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} fallbackElement={<div>Loading…</div>} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );
