@@ -1,8 +1,18 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "../../../../components/Logo/Logo";
 import { FaArrowUp } from "react-icons/fa6";
+import useAuth from "../../../../hooks/useAuth";
 
 const Navbar = () => {
+  const { user, logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+    .catch(error => console.log(error)
+    )
+  }
+
   const links = <>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Services</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/coverage'}>Coverage</NavLink></li>
@@ -22,13 +32,13 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
+              {' '}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />{' '}
             </svg>
           </div>
           <ul
@@ -38,23 +48,27 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="md:text-2xl text-xs text-secondary">
+        <div className="md:text-2xl text-xs text-secondary">
           <Logo />
-        </a>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {links}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end lg:gap-4 gap-1">
-        <a className="btn text-[#606060] bg-transparent rounded-xl lg:text-xl lg:p-7 border border-[#dadada] font-bold">
-          Sign In
-        </a>
+        {user ? (
+          <button onClick={handleLogOut} className="btn text-[#606060] bg-transparent rounded-xl lg:text-xl lg:p-7 border border-[#dadada] font-bold">
+            Log Out
+          </button>
+        ) : (
+          <Link to={"/login"} className="btn text-[#606060] bg-transparent rounded-xl lg:text-xl lg:p-7 border border-[#dadada] font-bold">
+            Sign In
+          </Link>
+        )}
         <div className="flex items-center">
-          <a className="btn btn-primary text-secondary font-bold lg:text-xl lg:p-7 rounded-xl border-0">
+          <Link to={"/beRider"} className="btn btn-primary text-secondary font-bold lg:text-xl lg:p-7 rounded-xl border-0">
             Be a rider
-          </a>
+          </Link>
           <div className="hidden w-14 h-14 bg-secondary text-primary rounded-full lg:flex items-center justify-center">
             <FaArrowUp className="rotate-45" />
           </div>
