@@ -18,7 +18,8 @@ const Navbar = () => {
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/coverage'}>Coverage</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>About Us</NavLink></li>
     <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Pricing</NavLink></li>
-    <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/'}>Be a Rider</NavLink></li>
+    <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/send-parcel'}>Send Parcel</NavLink></li>
+    <li className="text-[16px] text-[#606060] font-medium"><NavLink to={'/rider'}>Be a Rider</NavLink></li>
   </>
   return (
     <div className="navbar bg-white rounded-2xl lg:px-8 py-5">
@@ -66,7 +67,7 @@ const Navbar = () => {
           </Link>
         )}
         <div className="flex items-center">
-          <Link to={"/beRider"} className="btn btn-primary text-secondary font-bold lg:text-xl lg:p-7 rounded-xl border-0">
+          <Link to={"/rider"} className="btn btn-primary text-secondary font-bold lg:text-xl lg:p-7 rounded-xl border-0">
             Be a rider
           </Link>
           <div className="hidden w-14 h-14 bg-secondary text-primary rounded-full lg:flex items-center justify-center">

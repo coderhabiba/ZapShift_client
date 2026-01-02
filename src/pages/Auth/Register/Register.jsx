@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import axios from 'axios';
+
 
 const Register = () => {
   const {
@@ -9,15 +11,41 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { createUser } = useAuth();
+  const { createUser, updateUserProfile } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate()
+  console.log('in register',location);
+  
 
   const handleRegistration = data => {
     console.log(data);
+    const profileImage = data.photo[0];
     createUser(data.email, data.password)
       .then(res => {
         console.log(res.user);
-        // update user profile
+
+        // 1. store the image in form data
+        const formData = new FormData();
+        formData.append('image', profileImage);
         
+        // 2. send the photo to store and get the url
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
+        axios.post(image_API_URL, formData).then(res => {
+          console.log('after image upload', res.data.data.url)
+
+          // update user profile to firebase
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          }
+          updateUserProfile(userProfile)
+            .then(() => {
+              console.log('user profile update')
+              navigate(location.state || '/')
+            })
+          .catch(error => console.log(error)
+          )
+        })
       })
       .catch(error => {
         console.log(error);
@@ -42,7 +70,7 @@ const Register = () => {
             className="input bg-transparent w-full rounded-md"
             placeholder="Your Name"
           />
-          {errors.email?.type === 'required' && (
+          {errors.name?.type === 'required' && (
             <p className="text-red-500">Name is required</p>
           )}
 
@@ -56,7 +84,7 @@ const Register = () => {
             className="bg-transparent w-full rounded-md file-input"
             placeholder="Your Photo"
           />
-          {errors.email?.type === 'required' && (
+          {errors.photo?.type === 'required' && (
             <p className="text-red-500">Photo is required</p>
           )}
 
@@ -103,12 +131,15 @@ const Register = () => {
             </p>
           )}
 
-          <button className="btn btn-primary mb-4 border-0 text-black rounded-md">
+          <button
+            type="submit"
+            className="btn btn-primary mb-4 border-0 text-black rounded-md"
+          >
             Register
           </button>
           <p className="text-[16px] text-[#71717a]">
             Already have an account?{' '}
-            <Link to={'/login'}>
+            <Link state={location.state} to={'/login'}>
               <span className="text-[#8FA748] underline">Login</span>
             </Link>
           </p>
